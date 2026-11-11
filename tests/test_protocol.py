@@ -54,3 +54,9 @@ def test_should_print_manifest_version_when_version_flag(tmp_path):
 def test_should_print_only_json_lines_when_run(tmp_path):
     _, lines = _invoke({"_action": "run"}, tmp_path)
     assert lines and all(m["type"] in ("progress", "result", "error") for m in lines)
+
+
+def test_should_declare_the_mandatory_terminate_action_when_manifest_is_read():
+    manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+    assert "terminate" in manifest["actions"]
+    assert "execute" in manifest["actions"]
