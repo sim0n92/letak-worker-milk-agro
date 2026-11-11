@@ -58,5 +58,5 @@ def test_should_print_only_json_lines_when_run(tmp_path):
 
 def test_should_declare_the_mandatory_terminate_action_when_manifest_is_read():
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
-    assert "terminate" in manifest["actions"]
+    assert {"execute", "spec", "check", "run", "terminate"} <= set(manifest["actions"])
     assert "execute" in manifest["actions"]

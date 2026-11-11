@@ -3,7 +3,7 @@
   "specVersion": "1.1",
   "type": "stdin",
   "name": "letak-worker-milk-agro",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Detect class without a scraper: reports the flyers an operator announced in the Source config (announced: pdfUrl, title, validFrom, validTo). Dedup by normalized PDF URL.",
   "author": "Fancysoft / 0ics",
   "repository": "https://github.com/sim0n92/letak-worker-milk-agro",
@@ -13,6 +13,80 @@
       "description": "Not supported; use the Proc-protocol 1.1 actions spec, check, run.",
       "input": { "type": "object", "properties": {} },
       "output": { "type": "object", "properties": {} }
+    },
+    "spec": {
+      "description": "Return the config and output JSON schemas (Proc-protocol 1.1).",
+      "input": { "type": "object", "properties": {} },
+      "output": {
+        "type": "object",
+        "properties": {
+          "configSchema": { "type": "object" },
+          "outputSchema": { "type": "object" },
+          "protocol": { "type": "string", "const": "1.1" }
+        }
+      }
+    },
+    "check": {
+      "description": "Test Source: validate the announced flyers; ok when every entry is valid.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "announced": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pdfUrl": { "type": "string" },
+                "title": { "type": "string" },
+                "validFrom": { "type": "string" },
+                "validTo": { "type": "string" }
+              }
+            },
+            "default": []
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "ok": { "type": "boolean" },
+          "announced": { "type": "integer" }
+        }
+      }
+    },
+    "run": {
+      "description": "Detect announced flyers: items = announced flyers not in state.seen, state = seen keys.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "announced": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pdfUrl": { "type": "string" },
+                "title": { "type": "string" },
+                "validFrom": { "type": "string" },
+                "validTo": { "type": "string" }
+              }
+            },
+            "default": []
+          },
+          "state": {
+            "type": ["object", "null"],
+            "properties": { "seen": { "type": "array", "items": { "type": "string" } } }
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "items": { "type": "array" },
+          "state": { "type": "object" },
+          "metrics": { "type": "object" },
+          "checks": { "type": "array" }
+        }
+      }
     },
     "terminate": {
       "description": "Cancel a running action and clean up resources.",
