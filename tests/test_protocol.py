@@ -28,7 +28,7 @@ def test_should_return_schemas_when_spec(tmp_path):
 def test_should_report_count_when_check(tmp_path):
     code, lines = _invoke({"_action": "check", "announced": [{"pdfUrl": "https://h.sk/a.pdf"}]}, tmp_path)
     data = [m for m in lines if m["type"] == "result"][0]["data"]
-    assert code == 0 and data == {"ok": True, "announced": 1}
+    assert code == 0 and data == {"ok": True, "details": {"announced": 1}}
 
 
 def test_should_emit_one_result_with_items_when_run(tmp_path):
