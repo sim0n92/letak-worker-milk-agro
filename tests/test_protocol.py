@@ -66,3 +66,9 @@ def test_should_keep_the_scraper_config_properties_in_the_spec_when_spec_is_read
     _, lines = _invoke({"_action": "spec"}, tmp_path)
     props = [m for m in lines if m["type"] == "result"][0]["data"]["configSchema"]["properties"]
     assert {"types", "state", "pageUrl", "flyerApiUrl", "announced"} <= set(props)
+
+
+def test_should_keep_the_scraper_metrics_in_the_output_schema_when_spec_is_read(tmp_path):
+    _, lines = _invoke({"_action": "spec"}, tmp_path)
+    metrics = [m for m in lines if m["type"] == "result"][0]["data"]["outputSchema"]["properties"]["metrics"]["properties"]
+    assert {"leaflets", "newLeaflets", "skippedNoPdf", "announced", "newAnnounced"} <= set(metrics)

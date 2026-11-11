@@ -40,7 +40,7 @@ OUTPUT_SCHEMA: dict[str, Any] = {
                 "type": {"type": "string"}, "title": {"type": "string"},
                 "validFrom": {"type": "string"}, "validTo": {"type": "string"}}}}}},
         "state": {"type": "object", "required": ["seen"], "properties": {"seen": {"type": "array", "items": {"type": "string"}}}},
-        "metrics": {"type": "object", "properties": {"announced": {"type": "integer"}, "newAnnounced": {"type": "integer"}}},
+        "metrics": {"type": "object", "properties": {"announced": {"type": "integer"}, "newAnnounced": {"type": "integer"}, "leaflets": {"type": "integer"}, "newLeaflets": {"type": "integer"}, "skippedNoPdf": {"type": "integer"}}},  # the scraper metrics stay declared for spec compatibility
         "checks": {"type": "array"},
     },
 }
