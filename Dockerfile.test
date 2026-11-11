@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements-dev.txt /tmp/requirements-dev.txt
+RUN pip3 install --no-cache-dir -r /tmp/requirements-dev.txt
+
+COPY src/main.py /app/main.py
+COPY src/announce.py /app/announce.py
+COPY src/v11.py /app/v11.py
+COPY manifest.json /app/manifest.json
+COPY tests /app/tests
+
+RUN mkdir -p /logs
+ENV PYTHONUNBUFFERED=1
+
+RUN cd /app && python3 -m pytest -q tests
+
+RUN echo "=== All tests passed ==="
+CMD ["echo", "All tests passed"]

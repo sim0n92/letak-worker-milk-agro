@@ -1,0 +1,18 @@
+{
+  "$schema": "https://example.com/process-class-manifest-v1.schema.json",
+  "specVersion": "1.1",
+  "type": "stdin",
+  "name": "letak-worker-milk-agro",
+  "version": "0.1.0",
+  "description": "Detect class without a scraper: reports the flyers an operator announced in the Source config (announced: pdfUrl, title, validFrom, validTo). Dedup by normalized PDF URL.",
+  "author": "Fancysoft / 0ics",
+  "repository": "https://github.com/sim0n92/letak-worker-milk-agro",
+  "authentication": false,
+  "actions": {
+    "execute": {
+      "description": "Not supported; use the Proc-protocol 1.1 actions spec, check, run.",
+      "input": { "type": "object", "properties": {} },
+      "output": { "type": "object", "properties": {} }
+    }
+  }
+}
