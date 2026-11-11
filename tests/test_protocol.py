@@ -60,3 +60,9 @@ def test_should_declare_the_mandatory_terminate_action_when_manifest_is_read():
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     assert {"execute", "spec", "check", "run", "terminate"} <= set(manifest["actions"])
     assert "execute" in manifest["actions"]
+
+
+def test_should_keep_the_scraper_config_properties_in_the_spec_when_spec_is_read(tmp_path):
+    _, lines = _invoke({"_action": "spec"}, tmp_path)
+    props = [m for m in lines if m["type"] == "result"][0]["data"]["configSchema"]["properties"]
+    assert {"types", "state", "announced"} <= set(props)
