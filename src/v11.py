@@ -17,6 +17,8 @@ CONFIG_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
         "types": {"type": "array", "items": {"type": "string"}, "default": []},  # accepted for spec compatibility with the scrapers, ignored
+        "pageUrl": {"type": "string"},  # accepted for spec compatibility with the scrapers, ignored
+        "flyerApiUrl": {"type": "string"},  # idem
         "announced": {"type": "array", "default": [], "items": {
             "type": "object", "required": ["pdfUrl"], "properties": {
                 "pdfUrl": {"type": "string", "format": "uri"},
