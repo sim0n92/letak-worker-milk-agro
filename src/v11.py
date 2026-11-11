@@ -16,6 +16,7 @@ CONFIG_SCHEMA: dict[str, Any] = {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "properties": {
+        "types": {"type": "array", "items": {"type": "string"}, "default": []},  # accepted for spec compatibility with the scrapers, ignored
         "announced": {"type": "array", "default": [], "items": {
             "type": "object", "required": ["pdfUrl"], "properties": {
                 "pdfUrl": {"type": "string", "format": "uri"},
