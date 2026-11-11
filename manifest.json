@@ -3,7 +3,7 @@
   "specVersion": "1.1",
   "type": "stdin",
   "name": "letak-worker-milk-agro",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Detect class without a scraper: reports the flyers an operator announced in the Source config (announced: pdfUrl, title, validFrom, validTo). Dedup by normalized PDF URL.",
   "author": "Fancysoft / 0ics",
   "repository": "https://github.com/sim0n92/letak-worker-milk-agro",
@@ -50,7 +50,7 @@
         "type": "object",
         "properties": {
           "ok": { "type": "boolean" },
-          "announced": { "type": "integer" }
+          "details": { "type": "object" }
         }
       }
     },

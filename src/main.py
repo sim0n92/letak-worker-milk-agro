@@ -263,7 +263,7 @@ class LetakWorker(ProcessClass):
                            code="UNKNOWN_ACTION", exit_code=EXIT_INPUT)
 
     def v11_check(self, input_data: dict[str, Any]) -> dict[str, Any]:
-        return {"ok": True, "announced": len(announce.validate(input_data.get("announced")))}
+        return {"ok": True, "details": {"announced": len(announce.validate(input_data.get("announced")))}}
 
     def v11_run(self, input_data: dict[str, Any]) -> dict[str, Any]:
         return announce.build_run_result(input_data.get("announced"), input_data.get("state"))
